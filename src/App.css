@@ -34,6 +34,16 @@
   color: #61dafb;
 }
 
+.Add-Button{
+  background-color: rgb(10, 65, 50);
+  border: none;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 30px;
+  color: orange;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
