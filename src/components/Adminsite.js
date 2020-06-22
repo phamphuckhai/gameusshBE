@@ -24,6 +24,7 @@ export default class Adminsite extends Component {
       loggedIn,
       questions: [],
       unsubscribe: null,
+      level: '',
     };
   }
 
@@ -35,7 +36,7 @@ export default class Adminsite extends Component {
   }
 
   swapLevel = (selectedKey) =>  {
-    var level = '';
+    var {level} = this.state;
     if(selectedKey=='#Level1'){
       level='questions';
     }
@@ -57,7 +58,8 @@ export default class Adminsite extends Component {
     }
     var unsubscribe = db.collection(level).onSnapshot(this.onCollectionUpdate);
     this.setState({
-      unsubscribe
+      unsubscribe,
+      level
     });
   }
 
@@ -134,8 +136,8 @@ export default class Adminsite extends Component {
               marginBottom: 10,
             }}
           >
-            <Link>
-              <button class="Add-Button">Add question</button>
+            <Link to = "/create">
+              <button class="Add-Button">Thêm câu hỏi</button>
             </Link>
           </div>
           <div class="container">

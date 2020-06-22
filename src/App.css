@@ -44,6 +44,17 @@
   color: orange;
 }
 
+.Edit-Button{
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  width: 400px;
+  font-size: 30px;
+  color: orange;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
