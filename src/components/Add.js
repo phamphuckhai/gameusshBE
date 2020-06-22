@@ -10,7 +10,7 @@ class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      islogin: false,
+      islogin: true,
       title: "",
       question: "",
       hint: "",
@@ -18,7 +18,7 @@ class Add extends Component {
       optionI: "",
       answer: "",
       image: "",
-      IMG: null,
+      IMG: null
     };
   }
   onChange = (e) => {
@@ -67,7 +67,29 @@ class Add extends Component {
     );
   };
 
-  onSubmit = (e) => {};
+  onSubmit = (e) => {
+    const level = localStorage.getItem("level");
+    e.preventDefault();
+    const{title, question, hint, optionC, optionI, answer, image} = this.state;
+    db.collection(level).add({
+      title, question, hint, optionC, optionI, answer, image
+    }).then((docRef) => {
+      this.setState({
+        title: '',
+        question: '', 
+        hint: '', 
+        optionC: '', 
+        optionI: '',
+        answer: '', 
+        image: ''
+      })
+      this.props.history.push("/admin");
+    })
+    .catch((error) => {
+      console.log("Error: ", error);
+    })
+
+  };
 
   render() {
     const {
@@ -91,7 +113,7 @@ class Add extends Component {
       paddingRight: "20px",
       borderRadius: "20px",
     };
-    if (this.state.loggedIn === false) {
+    if (this.state.islogin === false) {
       return <Redirect to="/" />;
     }
     return (
@@ -144,22 +166,22 @@ class Add extends Component {
             </div>
 
             <div class="form-group">
-            <label for="option1">Đáp án 1</label>
+            <label for="optionC">Đáp án 1</label>
               <input
                 type="text"
                 class="form-control"
-                name="option1"
+                name="optionC"
                 value={optionC}
                 onChange={this.onChange}
               ></input>
             </div>
 
             <div class="form-group">
-            <label for="option2">Đáp án 2</label>
+            <label for="optionI">Đáp án 2</label>
               <input
                 type="text"
                 class="form-control"
-                name="option2"
+                name="optionI"
                 value={optionI}
                 onChange={this.onChange}
               ></input>

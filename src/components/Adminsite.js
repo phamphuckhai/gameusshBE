@@ -10,28 +10,30 @@ export default class Adminsite extends Component {
     super(props);
     const token = localStorage.getItem("token");
 
-    let loggedIn = true;
+    let loggedIn = false;
     //Magic authenticate Token =))
     if (
-      token !=
+      token ===
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTkyNDgwMDE0fQ.PnimktEu9sHSpyLUCwBTHH4kgfbNcpDxu4Z0oq-BeX0"
     ) {
-      loggedIn = false;
+      loggedIn = true;
+      localStorage.setItem("isLogin","Oke");
     }
 
 
     this.state = {
-      loggedIn,
       questions: [],
       unsubscribe: null,
       level: '',
     };
   }
 
-  componentDidMount() {
-    const unsubscribe = db.collection("questions").onSnapshot(this.onCollectionUpdate);
+  async componentDidMount() {
+    const level = localStorage.getItem("level");
+    const unsubscribe = await db.collection(level).onSnapshot(this.onCollectionUpdate);
     this.setState({
-      unsubscribe
+      unsubscribe,
+      level
     })
   }
 
@@ -39,22 +41,27 @@ export default class Adminsite extends Component {
     var {level} = this.state;
     if(selectedKey=='#Level1'){
       level='questions';
+      localStorage.setItem("level", "questions1");
     }
     else if(selectedKey=='#Level2')
     {
       level='questions1';
+      localStorage.setItem("level", "questions1");
     }
     else if(selectedKey=='#Level3')
     {
       level='questions2';
+      localStorage.setItem("level", "questions2");
     }
     else if(selectedKey=='#Level4')
     {
       level='questions3';
+      localStorage.setItem("level", "questions3");
     }
     else if(selectedKey=='#Level5')
     {
-      level='questions4';
+      level='testBE';
+      localStorage.setItem("level", "testBE");
     }
     var unsubscribe = db.collection(level).onSnapshot(this.onCollectionUpdate);
     this.setState({
@@ -93,6 +100,29 @@ export default class Adminsite extends Component {
     });
   };
 
+  defaultKey() {
+    const level = localStorage.getItem("level");
+    if(level=="questions")
+    {
+      return "#Level1"
+    }else  if(level=="questions1")
+    {
+      return "#Level2"
+    }
+    else  if(level=="questions2")
+    {
+      return "#Level3"
+    }
+    else  if(level=="questions3")
+    {
+      return "#Level4"
+    }
+    else  if(level=="testBE")
+    {
+      return "#Level5"
+    }
+  }
+
   render() {
     const cardStyles = {
       width: "auto",
@@ -118,7 +148,7 @@ export default class Adminsite extends Component {
           <Navbar.Brand>Mức độ</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
+            <Nav className="mr-auto" defaultActiveKey={this.defaultKey}>
               <Nav.Link href="#Level1">Cực dễ</Nav.Link>
               <Nav.Link href="#Level2">Dễ</Nav.Link>
               <Nav.Link href="#Level3">Trung bình</Nav.Link>
