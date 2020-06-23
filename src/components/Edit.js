@@ -16,6 +16,7 @@ class Add extends Component {
     }
     this.state = {
       islogin,
+      key: "",
       title: "",
       question: "",
       hint: "",
@@ -152,9 +153,8 @@ class Add extends Component {
       );
       return;
     }
-
-    db.collection(level)
-      .add({
+    const updateRef = db.collection(level).doc(this.state.key);
+    updateRef.set({
         title,
         question,
         hint,
@@ -165,6 +165,7 @@ class Add extends Component {
       })
       .then((docRef) => {
         this.setState({
+          key: "",
           title: "",
           question: "",
           hint: "",
