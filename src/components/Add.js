@@ -74,11 +74,45 @@ class Add extends Component {
   componentDidMount(){
    
   }
+  
 
   onSubmit = (e) => {
     const level = localStorage.getItem("level");
-    e.preventDefault();
+    e.preventDefault();  
     const{title, question, hint, optionC, optionI, answer, image} = this.state;
+    if(title=='')
+    {
+      alert("Lỗi! Tiêu đề còn trống");
+      return;
+    }
+    if(question=='')
+    {
+      alert("Lỗi! Câu hỏi còn trống");
+      return;
+    }
+    if(hint=='')
+    {
+      alert("Lỗi! Gợi ý còn trống");
+      return;
+    }
+    if(optionC==''||optionI==''||answer=='')
+    {
+      alert("Lỗi! Đáp án còn trống");
+      return;
+    }
+    if(image=='')
+    {
+      alert("Lỗi! Chưa upload ảnh");
+      return;
+    }
+    if(optionC!=answer&&optionI!=answer)
+    {
+      alert("Lỗi! Đáp án đúng không trùng với các đáp án lựa chọn! Hệ thống phân biệt chữ in hoa! Vui lòng kiểm tra lại");
+      return;
+    }
+    
+
+
     db.collection(level).add({
       title, question, hint, optionC, optionI, answer, image
     }).then((docRef) => {

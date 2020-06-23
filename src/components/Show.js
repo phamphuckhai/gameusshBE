@@ -9,7 +9,13 @@ import "../App.css";
 class Show extends Component {
   constructor(props) {
     super(props);
+    let islogin = false;
+    const Login = localStorage.getItem("isLogin");
+    if (Login == "Oke") {
+      islogin = true;
+    }
     this.state = {
+      islogin,
       question: [],
       key: "",
       title: "",
@@ -17,23 +23,25 @@ class Show extends Component {
     };
   }
   async componentDidMount() {
-    const level = await localStorage.getItem("level");
-    const ref = await firebase
-      .firestore()
-      .collection(level)
-      .doc(this.props.match.params.id);
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          question: doc.data(),
-          key: doc.id,
-          title: document.title,
-          isLoading: false,
-        });
-      } else {
-        console.log("No such document is here!");
-      }
-    });
+    try {
+      const level = await localStorage.getItem("level");
+      const ref = await firebase
+        .firestore()
+        .collection(level)
+        .doc(this.props.match.params.id);
+      ref.get().then((doc) => {
+        if (doc.exists) {
+          this.setState({
+            question: doc.data(),
+            key: doc.id,
+            title: document.title,
+            isLoading: false,
+          });
+        } else {
+          console.log("No such document is here!");
+        }
+      });
+    } catch (error) {}
   }
   async delete(id) {
     const level = await localStorage.getItem("level");
@@ -86,6 +94,10 @@ class Show extends Component {
       justifyContent: "center",
       marginBottom: 10,
     };
+
+    if (this.state.islogin == false) {
+      return <Redirect to="/" />;
+    }
     return (
       <div>
         <Modal show={this.state.show} onHide={this.hanleClose.bind(this)}>
@@ -94,8 +106,7 @@ class Show extends Component {
           </Modal.Header>
           <Modal.Body>Bạn có chắc chắn muốn xóa!</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" 
-            onClick={this.hanleClose.bind(this)}>
+            <Button variant="secondary" onClick={this.hanleClose.bind(this)}>
               Quay lại
             </Button>
             <Button
