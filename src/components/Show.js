@@ -34,7 +34,6 @@ class Show extends Component {
           this.setState({
             question: doc.data(),
             key: doc.id,
-            title: document.title,
             isLoading: false,
           });
         } else {
@@ -45,7 +44,7 @@ class Show extends Component {
   }
   async delete(id) {
     const level = await localStorage.getItem("level");
-    var desertRef = firebase.storage().refFromURL(this.state.question.image);
+
     firebase
       .firestore()
       .collection(level)
@@ -58,14 +57,17 @@ class Show extends Component {
       .catch((error) => {
         console.error("Error is: ", error);
       });
-    desertRef
-      .delete()
-      .then(function () {
-        console.log("file detelted");
-      })
-      .catch(function (error) {
-        console.log("error while deleting the file");
-      });
+    try {
+      var desertRef = firebase.storage().refFromURL(this.state.question.image);
+      desertRef
+        .delete()
+        .then(function () {
+          console.log("file detelted");
+        })
+        .catch(function (error) {
+          console.log("error while deleting the file");
+        });
+    } catch (error) {}
   }
   hanleClose() {
     this.setState({
@@ -137,7 +139,7 @@ class Show extends Component {
             </Link>
             <button
               onClick={this.hanleShow.bind(this)}
-              style={{ marginLeft: 200, fontSize: 30 }}
+              style={{ marginLeft: "15rem", fontSize: 30 }}
               class="btn btn-danger"
             >
               Xóa

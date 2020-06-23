@@ -11,7 +11,7 @@ class Add extends Component {
     super(props);
     let islogin = false;
     const Login = localStorage.getItem("isLogin");
-    if(Login=="Oke"){
+    if (Login == "Oke") {
       islogin = true;
     }
     this.state = {
@@ -23,7 +23,7 @@ class Add extends Component {
       optionI: "",
       answer: "",
       image: "",
-      IMG: null
+      IMG: null,
     };
   }
   onChange = (e) => {
@@ -71,66 +71,89 @@ class Add extends Component {
       }
     );
   };
-  componentDidMount(){
-   
-  }
-  
+
+  handleDelete = () => {
+    try {
+      var desertRef = firebase.storage().refFromURL(this.state.image);
+      desertRef
+        .delete()
+        .then(function () {
+          console.log("file detelted");
+        })
+        .catch(function (error) {
+          console.log("error while deleting the file");
+        });
+    } catch (error) {}
+    this.setState({
+      image: null,
+    });
+  };
+  componentDidMount() {}
 
   onSubmit = (e) => {
     const level = localStorage.getItem("level");
-    e.preventDefault();  
-    const{title, question, hint, optionC, optionI, answer, image} = this.state;
-    if(title=='')
-    {
+    e.preventDefault();
+    const {
+      title,
+      question,
+      hint,
+      optionC,
+      optionI,
+      answer,
+      image,
+    } = this.state;
+    if (title == "") {
       alert("Lỗi! Tiêu đề còn trống");
       return;
     }
-    if(question=='')
-    {
+    if (question == "") {
       alert("Lỗi! Câu hỏi còn trống");
       return;
     }
-    if(hint=='')
-    {
+    if (hint == "") {
       alert("Lỗi! Gợi ý còn trống");
       return;
     }
-    if(optionC==''||optionI==''||answer=='')
-    {
+    if (optionC == "" || optionI == "" || answer == "") {
       alert("Lỗi! Đáp án còn trống");
       return;
     }
-    if(image=='')
-    {
+    if (image == "") {
       alert("Lỗi! Chưa upload ảnh");
       return;
     }
-    if(optionC!=answer&&optionI!=answer)
-    {
-      alert("Lỗi! Đáp án đúng không trùng với các đáp án lựa chọn! Hệ thống phân biệt chữ in hoa! Vui lòng kiểm tra lại");
+    if (optionC != answer && optionI != answer) {
+      alert(
+        "Lỗi! Đáp án đúng không trùng với các đáp án lựa chọn! Hệ thống phân biệt chữ in hoa! Vui lòng kiểm tra lại"
+      );
       return;
     }
-    
 
-
-    db.collection(level).add({
-      title, question, hint, optionC, optionI, answer, image
-    }).then((docRef) => {
-      this.setState({
-        title: '',
-        question: '', 
-        hint: '', 
-        optionC: '', 
-        optionI: '',
-        answer: '', 
-        image: ''
+    db.collection(level)
+      .add({
+        title,
+        question,
+        hint,
+        optionC,
+        optionI,
+        answer,
+        image,
       })
-      this.props.history.push("/admin");
-    })
-    .catch((error) => {
-      console.log("Error: ", error);
-    })
-
+      .then((docRef) => {
+        this.setState({
+          title: "",
+          question: "",
+          hint: "",
+          optionC: "",
+          optionI: "",
+          answer: "",
+          image: "",
+        });
+        this.props.history.push("/admin");
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
   };
 
   render() {
@@ -156,9 +179,9 @@ class Add extends Component {
       paddingRight: "20px",
       borderRadius: "20px",
     };
-   
-    if (this.state.islogin==false) {
-      return <Redirect to="/"/>;
+
+    if (this.state.islogin == false) {
+      return <Redirect to="/" />;
     }
     return (
       <div>
@@ -199,7 +222,7 @@ class Add extends Component {
             </div>
 
             <div class="form-group">
-            <label for="hint">Gợi ý</label>
+              <label for="hint">Gợi ý</label>
               <input
                 type="text"
                 class="form-control"
@@ -210,7 +233,7 @@ class Add extends Component {
             </div>
 
             <div class="form-group">
-            <label for="optionC">Đáp án 1</label>
+              <label for="optionC">Đáp án 1</label>
               <input
                 type="text"
                 class="form-control"
@@ -221,7 +244,7 @@ class Add extends Component {
             </div>
 
             <div class="form-group">
-            <label for="optionI">Đáp án 2</label>
+              <label for="optionI">Đáp án 2</label>
               <input
                 type="text"
                 class="form-control"
@@ -232,7 +255,7 @@ class Add extends Component {
             </div>
 
             <div class="form-group">
-            <label for="answer">Đáp án đúng</label>
+              <label for="answer">Đáp án đúng</label>
               <input
                 type="text"
                 class="form-control"
@@ -249,6 +272,9 @@ class Add extends Component {
             <div className="Buttons">
               <button class="Submit-Button" onClick={this.handleUpload}>
                 Upload ảnh
+              </button>
+              <button class="Submit-Button" onClick={this.handleDelete}>
+                Xóa ảnh
               </button>
               <button class="Submit-Button" onClick={this.onSubmit}>
                 Lưu
