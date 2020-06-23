@@ -11,7 +11,7 @@ export default class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      loggedIn: "",
+      loggedIn,
     };
 
     this.onChange = this.onChange.bind(this);

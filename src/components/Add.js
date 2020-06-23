@@ -9,8 +9,13 @@ import "../App.css";
 class Add extends Component {
   constructor(props) {
     super(props);
+    let islogin = false;
+    const Login = localStorage.getItem("isLogin");
+    if(Login=="Oke"){
+      islogin = true;
+    }
     this.state = {
-      islogin: true,
+      islogin,
       title: "",
       question: "",
       hint: "",
@@ -38,11 +43,11 @@ class Add extends Component {
 
   handleUpload = () => {
     alert("Vui lòng chờ cho đến khi ảnh được tải lên!");
-      
+    const level = localStorage.getItem("level");
     const { IMG } = this.state;
     const uploadTask = firebase
       .storage()
-      .ref(`images/${IMG.name}`)
+      .ref(`${level}/${IMG.name}`)
       .put(this.state.IMG);
     uploadTask.on(
       "state_changed",
@@ -55,7 +60,7 @@ class Add extends Component {
       () => {
         firebase
           .storage()
-          .ref("images")
+          .ref(level)
           .child(IMG.name)
           .getDownloadURL()
           .then((url) => {
@@ -66,6 +71,9 @@ class Add extends Component {
       }
     );
   };
+  componentDidMount(){
+   
+  }
 
   onSubmit = (e) => {
     const level = localStorage.getItem("level");
@@ -100,6 +108,7 @@ class Add extends Component {
       optionI,
       answer,
       image,
+      islogin,
     } = this.state;
     const cardStyles = {
       width: "auto",
@@ -113,8 +122,9 @@ class Add extends Component {
       paddingRight: "20px",
       borderRadius: "20px",
     };
-    if (this.state.islogin === false) {
-      return <Redirect to="/" />;
+   
+    if (this.state.islogin==false) {
+      return <Redirect to="/"/>;
     }
     return (
       <div>
@@ -128,7 +138,7 @@ class Add extends Component {
             }}
           >
             <Link to="/admin">
-              <button class="Add-Button">Danh sách câu hỏi</button>
+              <button class="Add-Button">Trang chủ</button>
             </Link>
           </div>
 

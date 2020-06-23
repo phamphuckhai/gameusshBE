@@ -22,6 +22,7 @@ export default class Adminsite extends Component {
 
 
     this.state = {
+      loggedIn,
       questions: [],
       unsubscribe: null,
       level: '',
@@ -29,12 +30,19 @@ export default class Adminsite extends Component {
   }
 
   async componentDidMount() {
+    try{
+    await localStorage.setItem("level", "questions");
     const level = localStorage.getItem("level");
     const unsubscribe = await db.collection(level).onSnapshot(this.onCollectionUpdate);
     this.setState({
       unsubscribe,
       level
     })
+  }
+  catch(error){
+
+  }
+    
   }
 
   swapLevel = (selectedKey) =>  {
@@ -60,8 +68,8 @@ export default class Adminsite extends Component {
     }
     else if(selectedKey=='#Level5')
     {
-      level='testBE';
-      localStorage.setItem("level", "testBE");
+      level='questions4';
+      localStorage.setItem("level", "questions4");
     }
     var unsubscribe = db.collection(level).onSnapshot(this.onCollectionUpdate);
     this.setState({
@@ -136,7 +144,7 @@ export default class Adminsite extends Component {
       paddingRight: "20px",
       borderRadius: "20px",
     };
-    if (this.state.loggedIn === false) {
+    if (this.state.loggedIn == false) {
       return <Redirect to="/" />;
     }
     return (

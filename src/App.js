@@ -19,7 +19,7 @@ class App extends Component {
         <Route exact path = "/admin" component ={Adminsite}/>
         <Route path = "/create" component={Add}/>
         <Route path = "/show/:id" component={Show}/>
-        <Route path = "/edit:id" component={Edit}/>
+        <Route path = "/edit/:id" component={Edit}/>
 
 
       </Switch>
