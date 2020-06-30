@@ -31,7 +31,6 @@ export default class Adminsite extends Component {
 
   async componentDidMount() {
     try{
-    await localStorage.setItem("level", "questions");
     const level = localStorage.getItem("level");
     const unsubscribe = await db.collection(level).onSnapshot(this.onCollectionUpdate);
     this.setState({
