@@ -150,10 +150,6 @@ class Add extends Component {
       alert("Lỗi! Câu hỏi còn trống");
       return;
     }
-    if (hint == "") {
-      alert("Lỗi! Gợi ý còn trống");
-      return;
-    }
     if (optionC == "" || optionI == "" || answer == "") {
       alert("Lỗi! Đáp án còn trống");
       return;
