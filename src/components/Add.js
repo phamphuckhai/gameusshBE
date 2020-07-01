@@ -5,6 +5,32 @@ import { db } from "../Config.js";
 import firebase from "../Config.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import  CKEditor  from '@ckeditor/ckeditor5-react';
+
+ClassicEditor.defaultConfig = {
+  toolbar: {
+    items: [
+      'heading',
+      '|',
+      'bold',
+      'italic',
+      '|',
+      'bulletedList',
+      'numberedList',
+      '|',
+      'insertTable',
+      'undo',
+      'redo'
+    ]
+  },
+  table: {
+    contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ],
+  },
+  language: 'en',
+  
+
+};
 
 class Add extends Component {
   constructor(props) {
@@ -26,11 +52,19 @@ class Add extends Component {
       IMG: null,
     };
   }
+  
   onChange = (e) => {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
   };
+
+  handleCKeditorChange = (e, editor) =>{
+    const data = editor.getData();
+    this.setState({
+      question: data,
+    });
+  }
 
   handleChange = (e) => {
     if (e.target.files[0]) {
@@ -42,6 +76,7 @@ class Add extends Component {
   };
 
   handleUpload = () => {
+    try{
     alert("Vui lòng chờ cho đến khi ảnh được tải lên!");
     const level = localStorage.getItem("level");
     const { IMG } = this.state;
@@ -70,6 +105,11 @@ class Add extends Component {
           });
       }
     );
+     }
+     catch(error){
+       //
+     }
+     
   };
 
   handleDelete = () => {
@@ -212,13 +252,21 @@ class Add extends Component {
             </div>
             <div class="form-group">
               <label for="question">Nội dung câu hỏi</label>
-              <textArea
+              {/* <textArea
                 class="form-control"
                 name="question"
                 onChange={this.onChange}
                 clos="80"
                 rows="3"
-              ></textArea>
+              ></textArea> */}
+              <CKEditor
+              editor = {ClassicEditor}
+              onInit = { editor => {
+                //this inializes our application ///
+                
+              }} 
+              onChange={this.handleCKeditorChange}
+              />
             </div>
 
             <div class="form-group">

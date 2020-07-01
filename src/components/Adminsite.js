@@ -4,6 +4,7 @@ import { Card, Navbar, Nav } from "react-bootstrap";
 import { db } from "../Config.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import ReactHtmlParser from 'react-html-parser'
 
 export default class Adminsite extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ export default class Adminsite extends Component {
     var {level} = this.state;
     if(selectedKey=='#Level1'){
       level='questions';
-      localStorage.setItem("level", "questions1");
+      localStorage.setItem("level", "questions");
     }
     else if(selectedKey=='#Level2')
     {
@@ -124,7 +125,7 @@ export default class Adminsite extends Component {
     {
       return "#Level4"
     }
-    else  if(level=="testBE")
+    else  if(level=="questions4")
     {
       return "#Level5"
     }
@@ -201,7 +202,7 @@ export default class Adminsite extends Component {
                     <td>
                       <Link to={`/show/${question.key}`}>{question.title}</Link>
                     </td>
-                    <td>{question.question}</td>
+                    <td>{ReactHtmlParser(question.question)}</td>
                     <td>{question.hint}</td>
                     <td>{question.optionC}</td>
                     <td>{question.optionI}</td>
