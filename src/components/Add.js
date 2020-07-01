@@ -45,8 +45,8 @@ class Add extends Component {
       title: "",
       question: "",
       hint: "",
-      optionC: "",
-      optionI: "",
+      optionC: "Đúng",
+      optionI: "Sai",
       answer: "",
       image: "",
       IMG: null,
@@ -164,7 +164,7 @@ class Add extends Component {
     }
     if (optionC != answer && optionI != answer) {
       alert(
-        "Lỗi! Đáp án đúng không trùng với các đáp án lựa chọn! Hệ thống phân biệt chữ in hoa! Vui lòng kiểm tra lại"
+        "Lỗi! Chưa chọn đáp án"
       );
       return;
     }
@@ -283,34 +283,42 @@ class Add extends Component {
             <div class="form-group">
               <label for="optionC">Đáp án 1</label>
               <input
+              readOnly
                 type="text"
                 class="form-control"
                 name="optionC"
                 value={optionC}
-                onChange={this.onChange}
               ></input>
             </div>
 
             <div class="form-group">
               <label for="optionI">Đáp án 2</label>
               <input
+                readOnly
                 type="text"
                 class="form-control"
                 name="optionI"
                 value={optionI}
-                onChange={this.onChange}
               ></input>
             </div>
 
             <div class="form-group">
               <label for="answer">Đáp án đúng</label>
-              <input
+              {/* <input
                 type="text"
                 class="form-control"
                 name="answer"
                 value={answer}
                 onChange={this.onChange}
-              ></input>
+              ></input> */}
+              <select
+              name="answer"
+              onChange={this.onChange}
+              class="form-control"
+              >
+                <option value="Đúng">Đúng</option>
+                <option value="Sai">Sai</option>
+              </select>
             </div>
 
             <div className="upload-data">

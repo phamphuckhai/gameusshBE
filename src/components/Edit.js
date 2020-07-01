@@ -5,7 +5,32 @@ import { db } from "../Config.js";
 import firebase from "../Config.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import  CKEditor  from '@ckeditor/ckeditor5-react';
 
+ClassicEditor.defaultConfig = {
+  toolbar: {
+    items: [
+      'heading',
+      '|',
+      'bold',
+      'italic',
+      '|',
+      'bulletedList',
+      'numberedList',
+      '|',
+      'insertTable',
+      'undo',
+      'redo'
+    ]
+  },
+  table: {
+    contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ],
+  },
+  language: 'en',
+  
+
+};
 class Add extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +45,8 @@ class Add extends Component {
       title: "",
       question: "",
       hint: "",
-      optionC: "",
-      optionI: "",
+      optionC: "Đúng",
+      optionI: "Sai",
       answer: "",
       image: "",
       IMG: null,
@@ -32,6 +57,13 @@ class Add extends Component {
     state[e.target.name] = e.target.value;
     this.setState(state);
   };
+
+  handleCKeditorChange = (e, editor) =>{
+    const data = editor.getData();
+    this.setState({
+      question: data,
+    });
+  }
 
   handleChange = (e) => {
     if (e.target.files[0]) {
@@ -237,7 +269,7 @@ class Add extends Component {
             </div>
             <div class="form-group">
               <label for="question">Nội dung câu hỏi</label>
-              <textArea
+              {/* <textArea
                 class="form-control"
                 name="question"
                 onChange={this.onChange}
@@ -245,7 +277,16 @@ class Add extends Component {
                 rows="3"
               >
                 {question}
-              </textArea>
+              </textArea> */}
+                <CKEditor
+              editor = {ClassicEditor}
+              onInit = { editor => {
+                //this inializes our application ///
+                
+              }} 
+              data = {this.state.question}
+              onChange={this.handleCKeditorChange}
+              />
             </div>
 
             <div class="form-group">
@@ -262,34 +303,43 @@ class Add extends Component {
             <div class="form-group">
               <label for="optionC">Đáp án 1</label>
               <input
+                readOnly
                 type="text"
                 class="form-control"
                 name="optionC"
                 value={optionC}
-                onChange={this.onChange}
               ></input>
             </div>
 
             <div class="form-group">
               <label for="optionI">Đáp án 2</label>
               <input
+                readOnly
                 type="text"
                 class="form-control"
                 name="optionI"
                 value={optionI}
-                onChange={this.onChange}
               ></input>
             </div>
 
             <div class="form-group">
               <label for="answer">Đáp án đúng</label>
-              <input
+              {/* <input
                 type="text"
                 class="form-control"
                 name="answer"
                 value={answer}
                 onChange={this.onChange}
-              ></input>
+              ></input> */}
+               <select
+              name="answer"
+              onChange={this.onChange}
+              class="form-control"
+              value = {answer}
+              >
+                <option value="Đúng">Đúng</option>
+                <option value="Sai">Sai</option>
+              </select>
             </div>
 
             <div className="upload-data">

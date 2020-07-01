@@ -33,7 +33,7 @@ export default class Login extends Component {
         "token",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTkyNDgwMDE0fQ.PnimktEu9sHSpyLUCwBTHH4kgfbNcpDxu4Z0oq-BeX0"
       );
-      localStorage.setItem("level", "test");
+      localStorage.setItem("level", "questions");
       this.setState({
         loggedIn: true,
       });
