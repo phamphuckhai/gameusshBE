@@ -8,29 +8,7 @@ import "../App.css";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import  CKEditor  from '@ckeditor/ckeditor5-react';
 
-ClassicEditor.defaultConfig = {
-  toolbar: {
-    items: [
-      'heading',
-      '|',
-      'bold',
-      'italic',
-      '|',
-      'bulletedList',
-      'numberedList',
-      '|',
-      'insertTable',
-      'undo',
-      'redo'
-    ]
-  },
-  table: {
-    contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ],
-  },
-  language: 'en',
-  
 
-};
 class Add extends Component {
   constructor(props) {
     super(props);
