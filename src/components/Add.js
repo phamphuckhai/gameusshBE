@@ -9,33 +9,34 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import  CKEditor  from '@ckeditor/ckeditor5-react';
 
 
-ClassicEditor.defaultConfig = {
-  toolbar: {
-    items: [
-      'heading',
-      '|',
-      'bold',
-      'italic',
-      'link',
-      '|',
-      'bulletedList',
-      'numberedList',
+// ClassicEditor.defaultConfig = {
+//   toolbar: {
+//     items: [
+//       'heading',
+//       '|',
+//       'bold',
+//       'italic', 
+//       'link',
+//       '|',
+//       'bulletedList',
+//       'numberedList',
       
-      '|',
-      'blockQuote',
-      'insertTable',
-      'MediaEmbed',
-      'undo',
-      'redo'
-    ]
-  },
-  table: {
-    contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ],
-  },
-  language: 'en',
+//       '|',
+//       'blockQuote',
+//       'insertTable',
+//       'MediaEmbed',
+//       'undo',
+//       'redo',
+//       'imageUpload',
+//     ]
+//   },
+//   table: {
+//     contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ],
+//   },
+//   language: 'en',
   
 
-};
+// };
 
 class Add extends Component {
   constructor(props) {
@@ -266,6 +267,10 @@ class Add extends Component {
                 //this inializes our application ///
                 
               }} 
+              config={{
+                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
+                  'mediaEmbed', '|', 'undo', 'redo']
+              }}
               onChange={this.handleCKeditorChange}
               />
             </div>

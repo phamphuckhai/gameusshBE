@@ -153,17 +153,18 @@ export default class Adminsite extends Component {
           ADMIN SITE
         </h1>
         <Navbar expand="lg" bg="dark" variant="dark" onSelect={(selectedKey) => this.swapLevel(selectedKey)} style={{size:100}}>
-          <Navbar.Brand>Mức độ</Navbar.Brand>
+          {/* <Navbar.Brand>Mức độ</Navbar.Brand> */}
+          <Navbar.Brand>Quản lí câu hỏi</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          {/* <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto" defaultActiveKey={this.defaultKey}>
               <Nav.Link href="#Level1">Cực dễ</Nav.Link>
               <Nav.Link href="#Level2">Dễ</Nav.Link>
               <Nav.Link href="#Level3">Trung bình</Nav.Link>
               <Nav.Link href="#Level4">Khó</Nav.Link>
-              <Nav.Link href="#Level5">Cực khó</Nav.Link>
+              <Nav.Link href="#Level5">Cực khó</Nav.Link> 
             </Nav>
-          </Navbar.Collapse>
+          </Navbar.Collapse> */}
         </Navbar>
         <Card style={cardStyles}>
           <div

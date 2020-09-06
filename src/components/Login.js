@@ -28,7 +28,7 @@ export default class Login extends Component {
     e.preventDefault();
     const { username, password } = this.state;
     //login magic =))
-    if (username === "admin" && password === "admin123") {
+    if (username === "admin" && password === "LU~<DkzQ^6xLe]yC") {
       localStorage.setItem(
         "token",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTkyNDgwMDE0fQ.PnimktEu9sHSpyLUCwBTHH4kgfbNcpDxu4Z0oq-BeX0"
