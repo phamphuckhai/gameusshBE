@@ -131,6 +131,16 @@ export default class Adminsite extends Component {
     }
   }
 
+   
+  modifyUrl (url){
+    let endpoint = url;
+    endpoint = endpoint.replace('oembed', 'iframe');
+    endpoint = endpoint.replace('url', 'src');
+    endpoint = endpoint.replace('watch?v=', 'embed/');
+    endpoint = endpoint.replace('oembed', 'iframe');
+    return endpoint;
+  }
+
   render() {
     const cardStyles = {
       width: "auto",
@@ -203,7 +213,7 @@ export default class Adminsite extends Component {
                     <td>
                       <Link to={`/show/${question.key}`}>{question.title}</Link>
                     </td>
-                    <td>{ReactHtmlParser(question.question)}</td>
+                    <td>{ReactHtmlParser(this.modifyUrl(question.question))}</td>
                     <td>{question.hint}</td>
                     <td>{question.optionC}</td>
                     <td>{question.optionI}</td>
