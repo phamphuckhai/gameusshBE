@@ -28,6 +28,8 @@ class Add extends Component {
       answer: "",
       image: "",
       IMG: null,
+      explain: "",
+
     };
   }
   onChange = (e) => {
@@ -40,6 +42,13 @@ class Add extends Component {
     const data = editor.getData();
     this.setState({
       question: data,
+    });
+  }
+
+  handleCKeditorChange2 = (e, editor) =>{
+    const data = editor.getData();
+    this.setState({
+      explain: data,
     });
   }
 
@@ -100,7 +109,9 @@ class Add extends Component {
             optionI: document.optionI,
             hint: document.hint,
             answer: document.answer,
-            image: document.image,
+            // image: document.image,
+            explain: document.explain,
+
           });
         } else {
           console.log("No such document is here!");
@@ -260,6 +271,23 @@ class Add extends Component {
               }} 
               data = {this.state.question}
               onChange={this.handleCKeditorChange}
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="explain">Lời giải thích</label>
+              <CKEditor
+              editor = {ClassicEditor}
+              onInit = { editor => {
+                //this inializes our application ///
+                
+              }} 
+              config={{
+                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
+                  'mediaEmbed', '|', 'undo', 'redo']
+              }}
+              data = {this.state.explain}
+              onChange={this.handleCKeditorChange2}
               />
             </div>
 

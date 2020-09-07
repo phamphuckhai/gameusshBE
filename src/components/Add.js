@@ -56,6 +56,7 @@ class Add extends Component {
       answer: "Đáng tin",
       image: "",
       IMG: null,
+      explain: "",
     };
   }
   
@@ -69,6 +70,13 @@ class Add extends Component {
     const data = editor.getData();
     this.setState({
       question: data,
+    });
+  }
+
+  handleCKeditorChange2 = (e, editor) =>{
+    const data = editor.getData();
+    this.setState({
+      explain: data,
     });
   }
 
@@ -146,7 +154,8 @@ class Add extends Component {
       optionC,
       optionI,
       answer,
-      image,
+      // image,
+      explain,
     } = this.state;
     if (title == "") {
       alert("Lỗi! Tiêu đề còn trống");
@@ -179,7 +188,8 @@ class Add extends Component {
         optionC,
         optionI,
         answer,
-        image,
+        // image,
+        explain,
       })
       .then((docRef) => {
         this.setState({
@@ -189,7 +199,8 @@ class Add extends Component {
           optionC: "",
           optionI: "",
           answer: "",
-          image: "",
+          // image: "",
+          explain: "",
         });
         this.props.history.push("/admin");
       })
@@ -208,6 +219,7 @@ class Add extends Component {
       answer,
       image,
       islogin,
+      explain,
     } = this.state;
     const cardStyles = {
       width: "auto",
@@ -272,6 +284,22 @@ class Add extends Component {
                   'mediaEmbed', '|', 'undo', 'redo']
               }}
               onChange={this.handleCKeditorChange}
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="explain">Lời giải thích</label>
+              <CKEditor
+              editor = {ClassicEditor}
+              onInit = { editor => {
+                //this inializes our application ///
+                
+              }} 
+              config={{
+                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
+                  'mediaEmbed', '|', 'undo', 'redo']
+              }}
+              onChange={this.handleCKeditorChange2}
               />
             </div>
 
