@@ -149,10 +149,10 @@ class Add extends Component {
       alert("Lỗi! Đáp án còn trống");
       return;
     }
-    if (image == "") {
-      alert("Lỗi! Chưa upload ảnh");
-      return;
-    }
+    // if (image == "") {
+    //   alert("Lỗi! Chưa upload ảnh");
+    //   return;
+    // }
     if (optionC != answer && optionI != answer) {
       alert(
         "Lỗi! Đáp án đúng không trùng với các đáp án lựa chọn! Hệ thống phân biệt chữ in hoa! Vui lòng kiểm tra lại"
@@ -316,17 +316,17 @@ class Add extends Component {
               </select>
             </div>
 
-            <div className="upload-data">
+            {/* <div className="upload-data">
               <input type="file" onChange={this.handleChange}></input>
               <img src={this.state.image} height="200" width="200" />
-            </div>
+            </div> */}
             <div className="Buttons">
-              <button class="Submit-Button" onClick={this.handleUpload}>
+              {/* <button class="Submit-Button" onClick={this.handleUpload}>
                 Upload ảnh
               </button>
               <button class="Submit-Button" onClick={this.handleDelete}>
                 Xóa ảnh
-              </button>
+              </button> */}
               <button class="Submit-Button" onClick={this.onSubmit}>
                 Lưu
               </button>

@@ -53,7 +53,7 @@ class Add extends Component {
       hint: "",
       optionC: "Đúng",
       optionI: "Sai",
-      answer: "",
+      answer: "Đúng",
       image: "",
       IMG: null,
     };
@@ -160,10 +160,10 @@ class Add extends Component {
       alert("Lỗi! Đáp án còn trống");
       return;
     }
-    if (image == "") {
-      alert("Lỗi! Chưa upload ảnh");
-      return;
-    }
+    // if (image == "") {
+    //   alert("Lỗi! Chưa upload ảnh");
+    //   return;
+    // }
     if (optionC != answer && optionI != answer) {
       alert(
         "Lỗi! Chưa chọn đáp án"
@@ -320,6 +320,7 @@ class Add extends Component {
               <select
               name="answer"
               onChange={this.onChange}
+              value = {answer}
               class="form-control"
               >
                 <option value="Đúng">Đúng</option>
@@ -327,17 +328,17 @@ class Add extends Component {
               </select>
             </div>
 
-            <div className="upload-data">
+            {/* <div className="upload-data">
               <input type="file" onChange={this.handleChange}></input>
               <img src={this.state.image} height="200" width="200" />
-            </div>
+            </div> */}
             <div className="Buttons">
-              <button class="Submit-Button" onClick={this.handleUpload}>
+              {/* <button class="Submit-Button" onClick={this.handleUpload}>
                 Upload ảnh
               </button>
               <button class="Submit-Button" onClick={this.handleDelete}>
                 Xóa ảnh
-              </button>
+              </button> */}
               <button class="Submit-Button" onClick={this.onSubmit}>
                 Lưu
               </button>
