@@ -51,9 +51,9 @@ class Add extends Component {
       title: "",
       question: "",
       hint: "",
-      optionC: "Đúng",
-      optionI: "Sai",
-      answer: "Đúng",
+      optionC: "Đáng tin",
+      optionI: "Không đáng tin",
+      answer: "Đáng tin",
       image: "",
       IMG: null,
     };
@@ -323,8 +323,8 @@ class Add extends Component {
               value = {answer}
               class="form-control"
               >
-                <option value="Đúng">Đúng</option>
-                <option value="Sai">Sai</option>
+                <option value="Đáng tin">Đáng tin</option>
+                <option value="Không đáng tin">Không đáng tin</option>
               </select>
             </div>
 

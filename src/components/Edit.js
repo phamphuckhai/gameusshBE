@@ -23,8 +23,8 @@ class Add extends Component {
       title: "",
       question: "",
       hint: "",
-      optionC: "Đúng",
-      optionI: "Sai",
+      optionC: "Đáng tin",
+      optionI: "Không đáng tin",
       answer: "",
       image: "",
       IMG: null,
@@ -311,8 +311,8 @@ class Add extends Component {
               class="form-control"
               value = {answer}
               >
-                <option value="Đúng">Đúng</option>
-                <option value="Sai">Sai</option>
+                <option value="Đáng tin">Đáng tin</option>
+                <option value="Không đáng tin">Không đáng tin</option>
               </select>
             </div>
 
