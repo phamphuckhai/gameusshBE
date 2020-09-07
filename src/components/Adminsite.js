@@ -241,14 +241,14 @@ export default class Adminsite extends Component {
                     <td>{question.optionC}</td>
                     <td>{question.optionI}</td>
                     <td>{question.answer}</td>
-                    <td>
+                    {/* <td>
                       <img
                         src={question.image}
                         width="100px"
                         height="100px"
                         alt="image"
                       ></img>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
