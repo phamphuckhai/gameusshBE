@@ -27,6 +27,7 @@ export default class Adminsite extends Component {
       questions: [],
       unsubscribe: null,
       level: '',
+      setting: [],
     };
   }
 
@@ -42,7 +43,21 @@ export default class Adminsite extends Component {
   catch(error){
 
   }
-    
+  var setting = [];
+    // get setting 
+    await db.collection("settings")
+    .get()
+    .then(snapshot => {
+        console.log(snapshot);
+        snapshot.forEach(doc => {
+
+            const data = doc.data();
+            setting.push(data);
+        })
+        console.log(setting);
+        this.setState({ setting: setting })
+    })
+    .catch(error => console.log(error));
   }
 
   swapLevel = (selectedKey) =>  {
@@ -133,12 +148,20 @@ export default class Adminsite extends Component {
 
    
   modifyUrl (url){
-    let endpoint = url;
-    endpoint = endpoint.replace('oembed', 'iframe');
-    endpoint = endpoint.replace('url', 'src');
-    endpoint = endpoint.replace('watch?v=', 'embed/');
-    endpoint = endpoint.replace('oembed', 'iframe');
-    return endpoint;
+    try{
+
+      
+      let endpoint = url;
+      let tmp = 'iframe width="'+ this.state.setting[0].width + '" height="'+this.state.setting[0].height + '" allowFullScreen'
+      endpoint = endpoint.replace('oembed', tmp);
+      endpoint = endpoint.replace('url', 'src');
+      endpoint = endpoint.replace('watch?v=', 'embed/');
+      endpoint = endpoint.replace('oembed', 'iframe');
+      return endpoint;
+    }
+    catch(error){
+
+     }
   }
 
   render() {
