@@ -227,7 +227,7 @@ export default class Adminsite extends Component {
                   <th>Đáp án 1</th>
                   <th>Đáp án 2</th>
                   <th>Đáp án đúng</th>
-                  <th>Hình ảnh</th>
+                  {/* <th>Hình ảnh</th> */}
                 </tr>
               </thead>
               <tbody>
