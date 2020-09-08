@@ -311,7 +311,7 @@ class Add extends Component {
                       'imageTextAlternative'
                   ]
               },
-                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
+                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'insertTable',
                   'mediaEmbed', '|', 'undo', 'redo', '|', 'imageResize']
               }}
               onChange={this.handleCKeditorChange}
@@ -360,7 +360,7 @@ class Add extends Component {
                       'imageTextAlternative'
                   ]
               },
-                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
+                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'insertTable',
                   'mediaEmbed', '|', 'undo', 'redo', '|', 'imageResize']
               }}
               onChange={this.handleCKeditorChange2}

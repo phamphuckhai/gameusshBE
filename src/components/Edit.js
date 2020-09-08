@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
-import { Card, Navbar, Nav, Alert } from "react-bootstrap";
+import { Card, Navbar, Nav, Alert,  } from "react-bootstrap";
 import { db } from "../Config.js";
 import firebase from "../Config.js";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -32,6 +32,7 @@ class Add extends Component {
 
     };
   }
+  
   onChange = (e) => {
     const state = this.state;
     state[e.target.name] = e.target.value;
@@ -303,7 +304,7 @@ class Add extends Component {
                       'imageTextAlternative'
                   ]
               },
-                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
+                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'insertTable',
                   'mediaEmbed', '|', 'undo', 'redo', '|', 'imageResize']
               }}
               data = {this.state.question}
@@ -353,7 +354,7 @@ class Add extends Component {
                       'imageTextAlternative'
                   ]
               },
-                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
+                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'insertTable',
                   'mediaEmbed', '|', 'undo', 'redo', '|', 'imageResize']
               }}
               data = {this.state.explain}
