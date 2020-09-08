@@ -152,11 +152,13 @@ export default class Adminsite extends Component {
 
       
       let endpoint = url;
-      let tmp = 'iframe width="'+ this.state.setting[0].width + '" height="'+this.state.setting[0].height + '" allowFullScreen'
-      endpoint = endpoint.replace('oembed', tmp);
-      endpoint = endpoint.replace('url', 'src');
-      endpoint = endpoint.replace('watch?v=', 'embed/');
-      endpoint = endpoint.replace('oembed', 'iframe');
+      let tmp = '<iframe width="' + this.state.setting[0].width + '" height="' + this.state.setting[0].height + '" allowFullScreen'
+      endpoint = endpoint.replace(/<oembed/g, tmp);
+      endpoint = endpoint.replace(/url/g, 'src');
+      endpoint = endpoint.replace(/watch\?v=/g, 'embed/');
+      endpoint = endpoint.replace(/oembed>/g, 'iframe>');
+      endpoint = endpoint.replace(/<img/g, '<img id="myImage"');
+      console.log(endpoint);
       return endpoint;
     }
     catch(error){
