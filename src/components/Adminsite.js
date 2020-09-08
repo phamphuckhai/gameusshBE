@@ -158,7 +158,6 @@ export default class Adminsite extends Component {
       endpoint = endpoint.replace(/watch\?v=/g, 'embed/');
       endpoint = endpoint.replace(/oembed>/g, 'iframe>');
       endpoint = endpoint.replace(/<img/g, '<img id="myImage"');
-      console.log(endpoint);
       return endpoint;
     }
     catch(error){
