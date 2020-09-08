@@ -147,7 +147,7 @@ class Add extends Component {
       optionC,
       optionI,
       answer,
-      image,
+      explain,
     } = this.state;
     if (title == "") {
       alert("Lỗi! Tiêu đề còn trống");
@@ -179,7 +179,7 @@ class Add extends Component {
         optionC,
         optionI,
         answer,
-        image,
+        explain,
       })
       .then((docRef) => {
         this.setState({
@@ -190,7 +190,7 @@ class Add extends Component {
           optionC: "",
           optionI: "",
           answer: "",
-          image: "",
+          explain: "",
         });
         this.props.history.push("/admin");
       })
