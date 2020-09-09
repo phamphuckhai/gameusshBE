@@ -5,6 +5,7 @@ import Adminsite from "./components/Adminsite";
 import Add from "./components/Add.js"
 import Edit from "./components/Edit.js"
 import Show from "./components/Show.js"
+import Detail from "./components/Detail.js"
 
 
 class App extends Component {
@@ -20,8 +21,7 @@ class App extends Component {
         <Route path = "/create" component={Add}/>
         <Route path = "/show/:id" component={Show}/>
         <Route path = "/edit/:id" component={Edit}/>
-
-
+        <Route path = "/detail" component={Detail}/>
       </Switch>
       </BrowserRouter>
     );

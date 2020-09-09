@@ -20,6 +20,7 @@ class Show extends Component {
       key: "",
       title: "",
       show: false,
+      setting: [],
     };
   }
   async componentDidMount() {
@@ -41,10 +42,37 @@ class Show extends Component {
         }
       });
     } catch (error) {}
+
+    var setting = [];
+    // get setting 
+    await db.collection("settings")
+    .get()
+    .then(snapshot => {
+        console.log(snapshot);
+        snapshot.forEach(doc => {
+
+            const data = doc.data();
+            setting.push(data);
+        })
+        console.log(setting);
+        this.setState({ setting: setting })
+    })
+    .catch(error => console.log(error));
   }
   async delete(id) {
     const level = await localStorage.getItem("level");
-
+    if(this.state.question.answer=="Đáng tin"){
+      if(this.state.setting[1].True<7){
+        alert("Lỗi còn dưới dữ liệu cho phép");
+        return;
+      }
+    }
+    if(this.state.question.answer=="Không đáng tin"){
+      if(this.state.setting[1].False<7){
+        alert("Lỗi còn dưới dữ liệu cho phép");
+        return;
+      }
+    }
     firebase
       .firestore()
       .collection(level)
@@ -52,22 +80,36 @@ class Show extends Component {
       .delete()
       .then(() => {
         console.log("document delete successful");
+
+        if(this.state.question.answer=="Đáng tin")
+        {
+          db.collection("settings").doc("Ue5P92W3Zu6rUzDJBIVo").update({
+            True: this.state.setting[1].True-1,
+        });
+      }
+      if(this.state.question.answer=="Không đáng tin")
+      {
+        db.collection("settings").doc("Ue5P92W3Zu6rUzDJBIVo").update({
+          False: this.state.setting[1].False-1,
+      });
+    }
         this.props.history.push("/admin");
       })
       .catch((error) => {
         console.error("Error is: ", error);
       });
-    try {
-      var desertRef = firebase.storage().refFromURL(this.state.question.image);
-      desertRef
-        .delete()
-        .then(function () {
-          console.log("file detelted");
-        })
-        .catch(function (error) {
-          console.log("error while deleting the file");
-        });
-    } catch (error) {}
+    // try {
+    //   var desertRef = firebase.storage().refFromURL(this.state.question.image);
+    //   desertRef
+    //     .delete()
+    //     .then(function () {
+    //       console.log("file detelted");
+        
+    //     })
+    //     .catch(function (error) {
+    //       console.log("error while deleting the file");
+    //     });
+    // } catch (error) {}
   }
   hanleClose() {
     this.setState({

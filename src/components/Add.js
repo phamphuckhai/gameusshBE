@@ -55,6 +55,7 @@ class Add extends Component {
       image: "",
       IMG: null,
       explain: "",
+      setting: [],
     };
   }
   
@@ -140,7 +141,23 @@ class Add extends Component {
       image: null,
     });
   };
-  componentDidMount() {}
+  async componentDidMount() {
+    var setting = [];
+    // get setting 
+    await db.collection("settings")
+    .get()
+    .then(snapshot => {
+        console.log(snapshot);
+        snapshot.forEach(doc => {
+
+            const data = doc.data();
+            setting.push(data);
+        })
+        console.log(setting);
+        this.setState({ setting: setting })
+    })
+    .catch(error => console.log(error));
+  }
 
   onSubmit = (e) => {
     const level = localStorage.getItem("level");
@@ -154,6 +171,7 @@ class Add extends Component {
       answer,
       // image,
       explain,
+      setting
     } = this.state;
     if (title == "") {
       alert("Lỗi! Tiêu đề còn trống");
@@ -177,7 +195,18 @@ class Add extends Component {
       );
       return;
     }
-
+    if(answer=="Đáng tin")
+    {
+      db.collection("settings").doc("Ue5P92W3Zu6rUzDJBIVo").update({
+        True: setting[1].True+1,
+    });
+    }
+    if(answer=="Không đáng tin")
+    {
+      db.collection("settings").doc("Ue5P92W3Zu6rUzDJBIVo").update({
+        False: setting[1].False+1,
+    });
+    }
     db.collection(level)
       .add({
         title,

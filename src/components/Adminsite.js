@@ -60,6 +60,10 @@ export default class Adminsite extends Component {
     .catch(error => console.log(error));
   }
 
+  settingOnClick(){
+    this.props.history.push("/detail");
+  }
+
   swapLevel = (selectedKey) =>  {
     var {level} = this.state;
     if(selectedKey=='#Level1'){
@@ -188,7 +192,7 @@ export default class Adminsite extends Component {
         </h1>
         <Navbar expand="lg" bg="dark" variant="dark" onSelect={(selectedKey) => this.swapLevel(selectedKey)} style={{size:100}}>
           {/* <Navbar.Brand>Mức độ</Navbar.Brand> */}
-          <Navbar.Brand>Quản lí câu hỏi</Navbar.Brand>
+          <Navbar.Brand>Quản lí câu hỏi <button onClick={this.settingOnClick.bind(this)}>Cài đặt</button></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           {/* <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto" defaultActiveKey={this.defaultKey}>
@@ -199,6 +203,8 @@ export default class Adminsite extends Component {
               <Nav.Link href="#Level5">Cực khó</Nav.Link> 
             </Nav>
           </Navbar.Collapse> */}
+          
+          
         </Navbar>
         <Card style={cardStyles}>
           <div
