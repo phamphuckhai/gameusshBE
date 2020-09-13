@@ -453,6 +453,7 @@ class Add extends Component {
               <input type="file" onChange={this.handleChange}></input>
               <img src={this.state.image} height="200" width="200" />
             </div> */}
+            
             <div className="Buttons">
               {/* <button class="Submit-Button" onClick={this.handleUpload}>
                 Upload ảnh
