@@ -229,10 +229,10 @@ export default class Adminsite extends Component {
               <thead>
                 <tr>
                   <th>Tiêu đề</th>
-                  <th>Câu hỏi</th>
+                  {/* <th>Câu hỏi</th> */}
                   <th>Gợi ý</th>
-                  <th>Đáp án 1</th>
-                  <th>Đáp án 2</th>
+                  {/* <th>Đáp án 1</th>
+                  <th>Đáp án 2</th> */}
                   <th>Đáp án đúng</th>
                   {/* <th>Hình ảnh</th> */}
                 </tr>
@@ -243,10 +243,10 @@ export default class Adminsite extends Component {
                     <td>
                       <Link to={`/show/${question.key}`}>{question.title}</Link>
                     </td>
-                    <td>{ReactHtmlParser(this.modifyUrl(question.question))}</td>
+                    {/* <td>{ReactHtmlParser(this.modifyUrl(question.question))}</td> */}
                     <td>{question.hint}</td>
-                    <td>{question.optionC}</td>
-                    <td>{question.optionI}</td>
+                    {/* <td>{question.optionC}</td>
+                    <td>{question.optionI}</td> */}
                     <td>{question.answer}</td>
                     {/* <td>
                       <img
